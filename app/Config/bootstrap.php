@@ -51,6 +51,62 @@ Cache::config('default', array('engine' => 'File'));
  *
  */
 
+// Load composer autoload.
+require APP . '../vendors/autoload.php';
+
+// Remove and re-prepend CakePHP's autoloader as composer thinks it is the most important.
+// See https://github.com/composer/composer/commit/c80cb76b9b5082ecc3e5b53b1050f76bb27b127b
+spl_autoload_unregister(array('App', 'load'));
+spl_autoload_register(array('App', 'load'), true, true);
+
+// Load the bootstrap file to load Notification Model
+CakePlugin::loadAll([
+	'DebugKit' => [],
+    'NotificationManager' => [
+        'bootstrap' => true
+    ],
+    'EnvironmentManager' => [
+        'bootstrap' => true
+    ],
+    'PaymentManager' => [
+        'bootstrap' => true
+    ],
+    'Users' => [
+		'routes' => true
+	]
+]);
+
+Configure::write('EnvironmentUtility.environments', [
+    'production' => [
+        'urls' => [
+            'www.example.com'
+        ],
+        'paths' => [
+            '/var/www/html/app/'
+        ]
+    ],
+    'dev' => [
+        'urls' => [
+            'localhost/CodeChallenge'
+        ],
+        'paths' => [
+            '/var/www/CodeChallenge/app/'
+        ]
+    ]
+]);
+
+Configure::write('Stripe.test.secret', 'sk_test_ZA7t9QurpBZWnVG22zpPnoMq');
+Configure::write('Stripe.test.public', 'pk_test_7nNmjZrSVCbo414BBYhGvLxc');
+
+Configure::write('Stripe.live.secret', 'sk_live_jp0hD0T24iaOgcE6RBU7EzQj');
+Configure::write('Stripe.live.public', 'pk_live_1rj7KZ9AVxUYoOYrZJ6LiN0J');
+
+if (class_exists('EnvironmentUtility') && EnvironmentUtility::is('production')) {
+    Configure::write('Stripe.keys', Configure::read('Stripe.live'));
+} else {
+    Configure::write('Stripe.keys', Configure::read('Stripe.test'));
+}
+
 /**
  * Custom Inflector rules can be set to correctly pluralize or singularize table, model, controller names or whatever other
  * string is passed to the inflection functions
