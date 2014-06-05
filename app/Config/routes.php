@@ -35,6 +35,13 @@
  * how to customize the loading of plugin routes.
  */
 	CakePlugin::routes();
+Router::connect('/users', array('controller' => 'app_users'));
+Router::connect('/users/index/*', array('controller' => 'app_users'));
+Router::connect('/users/:action/*', array('controller' => 'app_users'));
+Router::connect('/users/users/:action/*', array('controller' => 'app_users'));
+Router::connect('/login', array('controller' => 'app_users', 'action' => 'login'));
+Router::connect('/logout', array('controller' => 'app_users', 'action' => 'logout'));
+Router::connect('/register', array('controller' => 'app_users', 'action' => 'add'));
 
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use

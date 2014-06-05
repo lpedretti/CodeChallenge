@@ -740,3 +740,11 @@ pre {
 #url-rewriting-warning {
 	display:none;
 }
+
+/* specific app styles */
+.carddetails { display: none; }
+.displayinline { display: inline; }
+.alignleft { float: left; }
+.tiny { width: 50px; }
+.payment-errors { color: #bb0000; }
+

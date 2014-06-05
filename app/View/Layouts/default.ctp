@@ -35,6 +35,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		// This identifies your website in the createToken call below
+		Stripe.setPublishableKey('<?= Configure::read('Stripe.keys.public') ?>');
+	</script>
+
 </head>
 <body>
 	<div id="container">
