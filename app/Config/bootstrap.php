@@ -72,7 +72,7 @@ CakePlugin::loadAll([
         'bootstrap' => true
     ],
     'Users' => [
-		'routes' => true
+		'routes' => false
 	]
 ]);
 
@@ -105,6 +105,17 @@ if (class_exists('EnvironmentUtility') && EnvironmentUtility::is('production')) 
     Configure::write('Stripe.keys', Configure::read('Stripe.live'));
 } else {
     Configure::write('Stripe.keys', Configure::read('Stripe.test'));
+}
+
+if (!Configure::check('UrbanAirship')) {
+    Configure::write('UrbanAirship.key', 'va3eck69TpaY1E_YT1BxQA');
+    Configure::write('UrbanAirship.master', 'v_ewjFtMTLu92wpTT3KtZw');
+}
+
+if (!Configure::check('Twilio')) {
+    Configure::write('Twilio.sid', 'AC757a4c967e7a79398c4afa950d3772dc');
+    Configure::write('Twilio.token', 'f6c01270c53772ec5becad005891cbb5');
+    Configure::write('Twilio.number', '+15865542870');
 }
 
 /**

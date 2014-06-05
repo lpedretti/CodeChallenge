@@ -39,7 +39,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		// This identifies your website in the createToken call below
-		Stripe.setPublishableKey('<?= Configure::write('Stripe.keys.public') ?>');
+		Stripe.setPublishableKey('<?= Configure::read('Stripe.keys.public') ?>');
 	</script>
 
 </head>
