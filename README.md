@@ -38,6 +38,10 @@ Let's assume you have created the database and have Config/database.php correctl
 5. Configure email.php in app/Config (copy email.php.default to email.php and at least change the 'from' in the default transport. Without a proper transport, email notification will throw an exception)
 6. Configure default email address in core or bootstrap: Configure::write('App.defaultEmail', 'noreply@admin.com');
 
+## where to start
+BASE/users -> register new account
+
 ## Limitations
 This test does not yet uses notifications plugin.
+
 
